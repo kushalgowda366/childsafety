@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Parently Child Safety QR Generator</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+  <style>
+    body {
+  
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .container {
+      max-width: 500px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #3c3c3c;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0 20px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px 5px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #qrcode {
+      margin: 20px auto;
+      display: flex;
+      justify-content: center;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body style="background-image: url('https://images.hindustantimes.com/rf/image_size_630x354/HT/p2/2019/08/24/Pictures/_8891b446-c670-11e9-8b78-a387d3830b78.png');">
+
+  <!-- Form Section -->
+  <div class="container" id="formSection">
+    <h1>Enter Child & Parent Info</h1>
+    <form id="infoForm" onsubmit="event.preventDefault(); generateQRCode();">
+      <input type="text" id="parentName" placeholder="Parent's Name" required />
+      <input type="tel" id="phone" placeholder="Phone Number" pattern="\d{10}" title="Enter a 10-digit phone number" required />
+      <input type="text" id="address" placeholder="Address" required />
+      
+      <select id="state" required>
+        <option value="">Select State</option>
+        <!-- List of all Indian states and union territories -->
+        <option>Andhra Pradesh</option>
+        <option>Arunachal Pradesh</option>
+        <option>Assam</option>
+        <option>Bihar</option>
+        <option>Chhattisgarh</option>
+        <option>Goa</option>
+        <option>Gujarat</option>
+        <option>Haryana</option>
+        <option>Himachal Pradesh</option>
+        <option>Jharkhand</option>
+        <option>Karnataka</option>
+        <option>Kerala</option>
+        <option>Madhya Pradesh</option>
+        <option>Maharashtra</option>
+        <option>Manipur</option>
+        <option>Meghalaya</option>
+        <option>Mizoram</option>
+        <option>Nagaland</option>
+        <option>Odisha</option>
+        <option>Punjab</option>
+        <option>Rajasthan</option>
+        <option>Sikkim</option>
+        <option>Tamil Nadu</option>
+        <option>Telangana</option>
+        <option>Tripura</option>
+        <option>Uttar Pradesh</option>
+        <option>Uttarakhand</option>
+        <option>West Bengal</option>
+        <option>Andaman and Nicobar Islands</option>
+        <option>Chandigarh</option>
+        <option>Dadra and Nagar Haveli and Daman and Diu</option>
+        <option>Delhi</option>
+        <option>Jammu and Kashmir</option>
+        <option>Ladakh</option>
+        <option>Lakshadweep</option>
+        <option>Puducherry</option>
+      </select>
+
+      <input type="text" id="district" placeholder="District" required />
+      <input type="text" id="childName" placeholder="Child's Name" required />
+      <input type="number" id="age" placeholder="Child's Age" required />
+      <button type="submit">Generate QR Code</button>
+      <button type="button" onclick="clearForm()">Clear</button>
+    </form>
+
+    <div id="qrcode"></div>
+    <p id="qrLabel" class="hidden">Scan this QR code for emergency contact info.</p>
+    <button class="hidden" id="downloadBtn" onclick="downloadQRCode()">Download QR Code</button>
+  </div>
+
+  <script>
+    function generateQRCode() {
+      const parentName = document.getElementById("parentName").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const address = document.getElementById("address").value.trim();
+      const state = document.getElementById("state").value.trim();
+      const district = document.getElementById("district").value.trim();
+      const childName = document.getElementById("childName").value.trim();
+      const age = document.getElementById("age").value.trim();
+
+      if (!parentName || !phone || !address || !state || !district || !childName || !age) {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      // ✅ Your hosted view.html URL
+      const baseUrl = "https://kushalgowda366.github.io/parently-qr/view.html";
+
+      const query = new URLSearchParams({
+        parentName,
+        phone,
+        address,
+        district,
+        state,
+        childName,
+        age
+      }).toString();
+
+      const fullUrl = `${baseUrl}?${query}`;
+
+      document.getElementById("qrcode").innerHTML = "";
+      new QRCode(document.getElementById("qrcode"), {
+        text: fullUrl,
+        width: 200,
+        height: 200
+      });
+
+      document.getElementById("downloadBtn").classList.remove("hidden");
+      document.getElementById("qrLabel").classList.remove("hidden");
+    }
+
+    function clearForm() {
+      document.getElementById("infoForm").reset();
+      document.getElementById("qrcode").innerHTML = "";
+      document.getElementById("downloadBtn").classList.add("hidden");
+      document.getElementById("qrLabel").classList.add("hidden");
+    }
+
+    function downloadQRCode() {
+      const canvas = document.querySelector("#qrcode canvas");
+      if (!canvas) {
+        alert("Please generate the QR code first.");
+        return;
+      }
+      const image = canvas.toDataURL("image/png");
+      const link = document.createElement("a");
+      link.href = image;
+      link.download = "parently_qrcode.png";
+      link.click();
+    }
+  </script>
+
+</body>
+</html>
