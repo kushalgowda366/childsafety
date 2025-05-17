@@ -11,8 +11,6 @@
       margin: 0;
       padding: 0;
       text-align: center;
-      background-image: url('https://images.hindustantimes.com/rf/image_size_630x354/HT/p2/2019/08/24/Pictures/_8891b446-c670-11e9-8b78-a387d3830b78.png');
-      background-attachment: fixed;
     }
     .container {
       max-width: 500px;
@@ -25,16 +23,10 @@
     h1 {
       color: #3c3c3c;
     }
-    label {
-      display: block;
-      text-align: left;
-      margin: 10px 0 5px;
-      font-weight: bold;
-    }
     input, select, textarea {
       width: 100%;
       padding: 10px;
-      margin-bottom: 15px;
+      margin: 10px 0 20px 0;
       border: 1px solid #ccc;
       border-radius: 8px;
       box-sizing: border-box;
@@ -61,73 +53,36 @@
     }
   </style>
 </head>
-<body>
+<body style="background-image: url('https://images.hindustantimes.com/rf/image_size_630x354/HT/p2/2019/08/24/Pictures/_8891b446-c670-11e9-8b78-a387d3830b78.png');">
 
   <div class="container" id="formSection">
     <h1>Enter Child & Parent Info</h1>
     <form id="infoForm" onsubmit="event.preventDefault(); generateQRCode();">
-
-      <label for="parentName">Parent's Name</label>
       <input type="text" id="parentName" placeholder="Parent's Name" required />
-
-      <label for="phone">Phone Number</label>
-      <input type="tel" id="phone" placeholder="10-digit Phone Number" pattern="\d{10}" title="Enter a 10-digit phone number" required />
-
-      <label for="address">Address</label>
-      <textarea id="address" placeholder="Enter the address here" required rows="4" style="resize: vertical;"></textarea>
-
-      <label for="state">State</label>
+      <input type="tel" id="phone" placeholder="Phone Number" pattern="\d{10}" title="Enter a 10-digit phone number" required />
+      
+      <textarea id="address" placeholder="Enter the address here" required rows="4" style="border-radius: 10px;"></textarea>
+      
       <select id="state" required>
         <option value="">Select State</option>
-        <option>Andhra Pradesh</option>
-        <option>Arunachal Pradesh</option>
-        <option>Assam</option>
-        <option>Bihar</option>
-        <option>Chhattisgarh</option>
-        <option>Goa</option>
-        <option>Gujarat</option>
-        <option>Haryana</option>
-        <option>Himachal Pradesh</option>
-        <option>Jharkhand</option>
-        <option>Karnataka</option>
-        <option>Kerala</option>
-        <option>Madhya Pradesh</option>
-        <option>Maharashtra</option>
-        <option>Manipur</option>
-        <option>Meghalaya</option>
-        <option>Mizoram</option>
-        <option>Nagaland</option>
-        <option>Odisha</option>
-        <option>Punjab</option>
-        <option>Rajasthan</option>
-        <option>Sikkim</option>
-        <option>Tamil Nadu</option>
-        <option>Telangana</option>
-        <option>Tripura</option>
-        <option>Uttar Pradesh</option>
-        <option>Uttarakhand</option>
-        <option>West Bengal</option>
-        <option>Andaman and Nicobar Islands</option>
-        <option>Chandigarh</option>
-        <option>Dadra and Nagar Haveli and Daman and Diu</option>
-        <option>Delhi</option>
-        <option>Jammu and Kashmir</option>
-        <option>Ladakh</option>
-        <option>Lakshadweep</option>
-        <option>Puducherry</option>
+        <option>Andhra Pradesh</option><option>Arunachal Pradesh</option><option>Assam</option><option>Bihar</option>
+        <option>Chhattisgarh</option><option>Goa</option><option>Gujarat</option><option>Haryana</option>
+        <option>Himachal Pradesh</option><option>Jharkhand</option><option>Karnataka</option><option>Kerala</option>
+        <option>Madhya Pradesh</option><option>Maharashtra</option><option>Manipur</option><option>Meghalaya</option>
+        <option>Mizoram</option><option>Nagaland</option><option>Odisha</option><option>Punjab</option>
+        <option>Rajasthan</option><option>Sikkim</option><option>Tamil Nadu</option><option>Telangana</option>
+        <option>Tripura</option><option>Uttar Pradesh</option><option>Uttarakhand</option><option>West Bengal</option>
+        <option>Andaman and Nicobar Islands</option><option>Chandigarh</option>
+        <option>Dadra and Nagar Haveli and Daman and Diu</option><option>Delhi</option><option>Jammu and Kashmir</option>
+        <option>Ladakh</option><option>Lakshadweep</option><option>Puducherry</option>
       </select>
 
-      <label for="district">District</label>
       <input type="text" id="district" placeholder="District" required />
-
-      <label for="childName">Child's Name</label>
       <input type="text" id="childName" placeholder="Child's Name" required />
-
-      <label for="age">Child's Age</label>
       <input type="number" id="age" placeholder="Child's Age" required />
 
-      <label for="notes">Medical conditions</label>
-      <input type="text" id="notes" placeholder="if any" />
+      <!-- ✅ Notes Field -->
+      <textarea id="notes" placeholder="Additional Notes (e.g., allergies, disability, behavior info)" rows="4" style="border-radius: 10px;"></textarea>
 
       <button type="submit">Generate QR Code</button>
       <button type="button" onclick="clearForm()">Clear</button>
@@ -147,42 +102,37 @@
       const district = document.getElementById("district").value.trim();
       const childName = document.getElementById("childName").value.trim();
       const age = document.getElementById("age").value.trim();
-      const notes = document.getElementById("notes").value.trim();
+      const notes = document.getElementById("notes").value.trim(); // ✅
 
       if (!parentName || !phone || !address || !state || !district || !childName || !age) {
-        alert("Please fill in all required fields.");
+        alert("Please fill in all fields.");
         return;
       }
 
-      const baseUrl = "https://kushalgowda366.github.io/childsafety/view.html";
+      const baseUrl = "https://kushalgowda366.github.io/parently-qr/view.html";
+
       const query = new URLSearchParams({
         parentName,
         phone,
         address,
-        district,
         state,
+        district,
         childName,
         age,
-        notes
+        notes // ✅
       }).toString();
 
       const fullUrl = `${baseUrl}?${query}`;
 
-      const qrContainer = document.getElementById("qrcode");
-      qrContainer.innerHTML = "";
+      document.getElementById("qrcode").innerHTML = "";
+      new QRCode(document.getElementById("qrcode"), {
+        text: fullUrl,
+        width: 200,
+        height: 200
+      });
 
-      try {
-        new QRCode(qrContainer, {
-          text: fullUrl,
-          width: 200,
-          height: 200
-        });
-        document.getElementById("downloadBtn").classList.remove("hidden");
-        document.getElementById("qrLabel").classList.remove("hidden");
-      } catch (error) {
-        alert("Error generating QR code. Please try again.");
-        console.error(error);
-      }
+      document.getElementById("downloadBtn").classList.remove("hidden");
+      document.getElementById("qrLabel").classList.remove("hidden");
     }
 
     function clearForm() {
