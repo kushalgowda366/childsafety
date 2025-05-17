@@ -58,7 +58,7 @@
     <h1>Enter Child & Parent Info</h1>
     <form id="infoForm" onsubmit="event.preventDefault(); generateQRCode();">
       <input type="text" id="parentName" placeholder="Parent's Name" required />
-      <input type="tel" id="phone" placeholder="Phone Number" pattern="\d{10}" title="Enter a 10-digit phone number" required />
+      <input type="tel" id="phone" placeholder="Phone Number" pattern="\d{10}" title="Enter a 10-digit phone number" required maxlength="10"/>
       <textarea id="address" placeholder="Enter the address here" required rows="4"></textarea>
       <select id="state" required>
         <option value="">Select State</option>
