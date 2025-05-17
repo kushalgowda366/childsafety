@@ -9,13 +9,10 @@
       background: #eef6fb;
       text-align: center;
       padding: 40px;
-      background-image: url('https://www.transparenttextures.com/patterns/pw-maze-white.png');
     }
-
     h2 {
       margin-bottom: 20px;
     }
-
     button {
       padding: 12px 20px;
       margin: 10px;
@@ -26,11 +23,9 @@
       color: white;
       cursor: pointer;
     }
-
     button:hover {
       background-color: #0056b3;
     }
-
     input[type="password"] {
       padding: 10px;
       margin: 10px;
@@ -38,7 +33,6 @@
       border: 1px solid #ccc;
       width: 250px;
     }
-
     .info-box {
       background-color: white;
       margin-top: 30px;
@@ -51,7 +45,6 @@
       margin-right: auto;
       text-align: left;
     }
-
     #passwordSection {
       display: none;
       margin-top: 20px;
@@ -78,17 +71,14 @@
 
   <script>
     const params = new URLSearchParams(window.location.search);
-
     const parentName = params.get("parentName") || "Unknown Parent";
     const phone = params.get("phone") || "Not Available";
     const address = params.get("address") || "Not Available";
-    const district = params.get("district") || "";
-    const state = params.get("state") || "";
     const childName = params.get("childName") || "Unknown Child";
     const age = params.get("age") || "Unknown Age";
-    const notes = params.get("notes") || "None";
+    const medical = params.get("medical") || "None listed";
 
-    const correctPolicePassword = "secure123"; // Change this for real deployments
+    const correctPolicePassword = "secure123"; // Change as needed
 
     function handleRole(role) {
       if (role === "general") {
@@ -117,18 +107,15 @@
     }
 
     function showPoliceInfo() {
-      const fullAddress = `${address}, ${district}, ${state}`;
       const msg = document.getElementById("messageText");
-
       msg.innerHTML = `
         <strong>Child Name:</strong> ${childName}<br>
         <strong>Age:</strong> ${age}<br>
         <strong>Parent Name:</strong> ${parentName}<br>
         <strong>Phone:</strong> ${phone}<br>
-        <strong>Address:</strong> ${fullAddress}<br>
-        <strong>Medical conditions:</strong> ${notes}<br>
+        <strong>Address:</strong> ${address}<br>
+        <strong>Medical Condition:</strong> ${medical}<br>
       `;
-
       document.getElementById("infoBox").style.display = "block";
       document.getElementById("passwordSection").style.display = "none";
     }
