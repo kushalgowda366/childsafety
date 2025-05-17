@@ -52,24 +52,57 @@
     }
   </style>
 </head>
-<body>
+<body style="background-image: url('https://images.hindustantimes.com/rf/image_size_630x354/HT/p2/2019/08/24/Pictures/_8891b446-c670-11e9-8b78-a387d3830b78.png');">
 
   <div class="container" id="formSection">
     <h1>Enter Child & Parent Info</h1>
     <form id="infoForm" onsubmit="event.preventDefault(); generateQRCode();">
       <input type="text" id="parentName" placeholder="Parent's Name" required />
       <input type="tel" id="phone" placeholder="Phone Number" pattern="\d{10}" title="Enter a 10-digit phone number" required />
-      <textarea id="address" placeholder="Enter the address here" required rows="3"></textarea>
+      <textarea id="address" placeholder="Enter the address here" required rows="4"></textarea>
       <select id="state" required>
         <option value="">Select State</option>
         <option>Andhra Pradesh</option>
-        <!-- (Add all other states/UTs here) -->
+        <option>Arunachal Pradesh</option>
+        <option>Assam</option>
+        <option>Bihar</option>
+        <option>Chhattisgarh</option>
+        <option>Goa</option>
+        <option>Gujarat</option>
+        <option>Haryana</option>
+        <option>Himachal Pradesh</option>
+        <option>Jharkhand</option>
+        <option>Karnataka</option>
+        <option>Kerala</option>
+        <option>Madhya Pradesh</option>
+        <option>Maharashtra</option>
+        <option>Manipur</option>
+        <option>Meghalaya</option>
+        <option>Mizoram</option>
+        <option>Nagaland</option>
+        <option>Odisha</option>
+        <option>Punjab</option>
+        <option>Rajasthan</option>
+        <option>Sikkim</option>
+        <option>Tamil Nadu</option>
+        <option>Telangana</option>
+        <option>Tripura</option>
+        <option>Uttar Pradesh</option>
+        <option>Uttarakhand</option>
+        <option>West Bengal</option>
+        <option>Andaman and Nicobar Islands</option>
+        <option>Chandigarh</option>
+        <option>Dadra and Nagar Haveli and Daman and Diu</option>
+        <option>Delhi</option>
+        <option>Jammu and Kashmir</option>
+        <option>Ladakh</option>
+        <option>Lakshadweep</option>
         <option>Puducherry</option>
       </select>
       <input type="text" id="district" placeholder="District" required />
       <input type="text" id="childName" placeholder="Child's Name" required />
       <input type="number" id="age" placeholder="Child's Age" required />
-      <input type="text" id="medical" placeholder="Medical Condition (if any)" />
+      <input type="text" id="medical" placeholder="Medical Condition" />
       <button type="submit">Generate QR Code</button>
       <button type="button" onclick="clearForm()">Clear</button>
     </form>
@@ -91,11 +124,12 @@
       const medical = document.getElementById("medical").value.trim();
 
       if (!parentName || !phone || !address || !state || !district || !childName || !age) {
-        alert("Please fill in all fields.");
+        alert("Please fill in all required fields.");
         return;
       }
 
       const baseUrl = "https://kushalgowda366.github.io/parently-qr/view.html";
+
       const query = new URLSearchParams({
         parentName,
         phone,
