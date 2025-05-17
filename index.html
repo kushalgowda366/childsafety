@@ -103,6 +103,7 @@
       <input type="text" id="childName" placeholder="Child's Name" required />
       <input type="number" id="age" placeholder="Child's Age" required />
       <input type="text" id="medical" placeholder="Medical Condition" />
+
       <button type="submit">Generate QR Code</button>
       <button type="button" onclick="clearForm()">Clear</button>
     </form>
@@ -123,25 +124,11 @@
       const age = document.getElementById("age").value.trim();
       const medical = document.getElementById("medical").value.trim();
 
-      if (!parentName || !phone || !address || !state || !district || !childName || !age) {
-        alert("Please fill in all required fields.");
-        return;
-      }
-
-      const baseUrl = "https://kushalgowda366.github.io/parently-qr/view.html";
-
       const query = new URLSearchParams({
-        parentName,
-        phone,
-        address,
-        district,
-        state,
-        childName,
-        age,
-        medical
+        parentName, phone, address, state, district, childName, age, medical
       }).toString();
 
-      const fullUrl = `${baseUrl}?${query}`;
+      const fullUrl = `https://kushalgowda366.github.io/parently-qr/view.html?${query}`;
 
       document.getElementById("qrcode").innerHTML = "";
       new QRCode(document.getElementById("qrcode"), {
