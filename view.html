@@ -5,8 +5,8 @@
   <title>Child Info Access</title>
   <style>
     body {
-      background: #eef6fb;
       font-family: Arial, sans-serif;
+      background: #eef6fb;
       text-align: center;
       padding: 40px;
     }
@@ -71,13 +71,17 @@
 
   <script>
     const params = new URLSearchParams(window.location.search);
+
     const parentName = params.get("parentName") || "Unknown Parent";
     const phone = params.get("phone") || "Not Available";
     const address = params.get("address") || "Not Available";
     const childName = params.get("childName") || "Unknown Child";
     const age = params.get("age") || "Unknown Age";
+    const state = params.get("state") || "Not Available";
+    const district = params.get("district") || "Not Available";
     const medical = params.get("medical") || "None";
-    const correctPolicePassword = "secure123";
+
+    const correctPolicePassword = "secure123"; // Change as needed
 
     function handleRole(role) {
       if (role === "general") {
@@ -90,6 +94,7 @@
     function showGeneralInfo() {
       const box = document.getElementById("infoBox");
       const msg = document.getElementById("messageText");
+
       msg.innerHTML = `
         <strong>Child Name:</strong> ${childName}<br>
         <strong>Parent Contact:</strong> ${phone}<br>
@@ -110,12 +115,15 @@
     function showPoliceInfo() {
       const box = document.getElementById("infoBox");
       const msg = document.getElementById("messageText");
+
       msg.innerHTML = `
         <strong>Child Name:</strong> ${childName}<br>
         <strong>Age:</strong> ${age}<br>
         <strong>Parent Name:</strong> ${parentName}<br>
         <strong>Phone:</strong> ${phone}<br>
         <strong>Address:</strong> ${address}<br>
+        <strong>District:</strong> ${district}<br>
+        <strong>State:</strong> ${state}<br>
         <strong>Medical Condition:</strong> ${medical}<br>
       `;
       box.style.display = "block";
