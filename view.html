@@ -5,8 +5,8 @@
   <title>Child Info Access</title>
   <style>
     body {
+      background-color: #eef6fb;
       font-family: Arial, sans-serif;
-      background: #eef6fb;
       text-align: center;
       padding: 40px;
     }
@@ -76,9 +76,9 @@
     const address = params.get("address") || "Not Available";
     const childName = params.get("childName") || "Unknown Child";
     const age = params.get("age") || "Unknown Age";
-    const medical = params.get("medical") || "None listed";
+    const medical = params.get("medical") || "None";
 
-    const correctPolicePassword = "secure123"; // Change as needed
+    const correctPolicePassword = "secure123";
 
     function handleRole(role) {
       if (role === "general") {
@@ -89,12 +89,15 @@
     }
 
     function showGeneralInfo() {
+      const box = document.getElementById("infoBox");
       const msg = document.getElementById("messageText");
+
       msg.innerHTML = `
         <strong>Child Name:</strong> ${childName}<br>
         <strong>Parent Contact:</strong> ${phone}<br>
+        <strong>Medical Condition:</strong> ${medical}<br>
       `;
-      document.getElementById("infoBox").style.display = "block";
+      box.style.display = "block";
     }
 
     function verifyPolice() {
@@ -107,7 +110,9 @@
     }
 
     function showPoliceInfo() {
+      const box = document.getElementById("infoBox");
       const msg = document.getElementById("messageText");
+
       msg.innerHTML = `
         <strong>Child Name:</strong> ${childName}<br>
         <strong>Age:</strong> ${age}<br>
@@ -116,7 +121,7 @@
         <strong>Address:</strong> ${address}<br>
         <strong>Medical Condition:</strong> ${medical}<br>
       `;
-      document.getElementById("infoBox").style.display = "block";
+      box.style.display = "block";
       document.getElementById("passwordSection").style.display = "none";
     }
   </script>
