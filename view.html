@@ -5,7 +5,7 @@
   <title>Child Info Access</title>
   <style>
     body {
-      background-color: #eef6fb;
+      background: #eef6fb;
       font-family: Arial, sans-serif;
       text-align: center;
       padding: 40px;
@@ -77,7 +77,6 @@
     const childName = params.get("childName") || "Unknown Child";
     const age = params.get("age") || "Unknown Age";
     const medical = params.get("medical") || "None";
-
     const correctPolicePassword = "secure123";
 
     function handleRole(role) {
@@ -91,7 +90,6 @@
     function showGeneralInfo() {
       const box = document.getElementById("infoBox");
       const msg = document.getElementById("messageText");
-
       msg.innerHTML = `
         <strong>Child Name:</strong> ${childName}<br>
         <strong>Parent Contact:</strong> ${phone}<br>
@@ -112,7 +110,6 @@
     function showPoliceInfo() {
       const box = document.getElementById("infoBox");
       const msg = document.getElementById("messageText");
-
       msg.innerHTML = `
         <strong>Child Name:</strong> ${childName}<br>
         <strong>Age:</strong> ${age}<br>
